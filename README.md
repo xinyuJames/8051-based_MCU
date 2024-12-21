@@ -1,4 +1,4 @@
-# 8051-Based MCU Development with STC89C516RD+ on PRECHIN51 A7
+# 8051 Development
 
 ## Description
 
