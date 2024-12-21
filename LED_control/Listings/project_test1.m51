@@ -1,0 +1,153 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    12/21/2024  08:54:29  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+D:\C51V961\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\project_test1 PRINT (.\Listings\project_test1.m51) RAMSIZE (
+>> 256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  D:\C51V961\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\project_test1 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     004BH     UNIT         ?PR?_ONEBYONELIGHT?MAIN
+            CODE    084BH     0016H     UNIT         ?PR?BLINKLIGHT?MAIN
+            CODE    0861H     0015H     UNIT         ?PR?_DELAY1MS?MAIN
+            CODE    0876H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0882H     0007H     UNIT         ?PR?MAIN?MAIN
+            CODE    0889H     0004H     UNIT         ?PR?SEPLIGHT?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\project_test1 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?_ONEBYONELIGHT?MAIN
+
+?PR?_ONEBYONELIGHT?MAIN
+  +--> ?PR?_DELAY1MS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\project_test1 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/21/2024  08:54:29  PAGE 2
+
+
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0861H         PUBLIC        _Delay1ms
+  C:084BH         PUBLIC        blinkLight
+  C:0800H         PUBLIC        _oneByOneLight
+  C:0882H         PUBLIC        main
+  C:0889H         PUBLIC        sepLight
+  -------         PROC          MAIN
+  C:0882H         LINE#         15
+  C:0882H         LINE#         16
+  C:0882H         LINE#         17
+  -------         ENDPROC       MAIN
+  -------         PROC          SEPLIGHT
+  C:0889H         LINE#         23
+  C:0889H         LINE#         24
+  C:0889H         LINE#         25
+  C:088CH         LINE#         26
+  -------         ENDPROC       SEPLIGHT
+  -------         PROC          BLINKLIGHT
+  C:084BH         LINE#         31
+  C:084BH         LINE#         32
+  C:084BH         LINE#         33
+  C:084BH         LINE#         34
+  C:084BH         LINE#         35
+  C:084EH         LINE#         36
+  C:0855H         LINE#         37
+  C:0858H         LINE#         38
+  C:085FH         LINE#         39
+  -------         ENDPROC       BLINKLIGHT
+  -------         PROC          _DELAY1MS
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0861H         LINE#         45
+  C:0861H         LINE#         46
+  C:0861H         LINE#         49
+  C:0865H         LINE#         50
+  C:0865H         LINE#         51
+  C:0866H         LINE#         52
+  C:0868H         LINE#         53
+  C:086AH         LINE#         55
+  C:086AH         LINE#         56
+  C:086CH         LINE#         57
+  C:086EH         LINE#         59
+  C:0873H         LINE#         60
+  C:0875H         LINE#         62
+  -------         ENDPROC       _DELAY1MS
+  -------         PROC          _ONEBYONELIGHT
+  D:0002H         SYMBOL        xms
+  -------         DO            
+  D:0082H         SYMBOL        led
+  -------         ENDDO         
+  C:0800H         LINE#         65
+  C:0804H         LINE#         66
+  C:0804H         LINE#         67
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/21/2024  08:54:29  PAGE 3
+
+
+  C:0807H         LINE#         69
+  C:0807H         LINE#         70
+  C:0807H         LINE#         71
+  C:080FH         LINE#         72
+  C:080FH         LINE#         73
+  C:0815H         LINE#         74
+  C:0820H         LINE#         75
+  C:0827H         LINE#         76
+  C:0829H         LINE#         78
+  C:0831H         LINE#         79
+  C:0831H         LINE#         80
+  C:0837H         LINE#         81
+  C:0842H         LINE#         82
+  C:0849H         LINE#         83
+  -------         ENDPROC       _ONEBYONELIGHT
+  -------         ENDMOD        MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SEPLIGHT?MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?BLINKLIGHT?MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0081H BYTE ( 6%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=144
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)
