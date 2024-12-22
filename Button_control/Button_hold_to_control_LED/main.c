@@ -1,3 +1,8 @@
+/*
+Xinyu Liu self-taught 8051 MCU
+
+version@2024/12/22
+*/
 #include <REGX52.H>
 #include <INTRINS.H>
 
