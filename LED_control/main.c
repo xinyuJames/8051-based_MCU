@@ -1,7 +1,7 @@
 /*
 Xinyu Liu self-taught 8051 MCU
-
-version@2024/12/21
+Description: this program include multiple helper functions associate with controlling LED light.
+Version@2024/12/21
 */
 
 #include <REGX52.H>
