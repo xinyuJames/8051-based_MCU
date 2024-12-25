@@ -1,0 +1,84 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              12/23/2024 07:35:45 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /*
+   2          Xinyu Liu self-taught 8051 MCU
+   3          Description: this program contains basic control to matrix_button module
+   4          Version@2024/12/23
+   5          */
+   6          
+   7          #include <REGX52.H>
+   8          #include <INTRINS.H>
+   9          #include "LCD1602.h"
+  10          #include "Delay.h"
+  11          #include "MatrixKey.h"
+  12          
+  13          void main()
+  14          {
+  15   1        unsigned char key;
+  16   1        unsigned int password;
+  17   1        unsigned int passtry;
+  18   1        unsigned int count;
+  19   1        LCD_Init();
+  20   1        count = 0;
+  21   1        password = 711;
+  22   1        passtry = 0;
+  23   1        
+  24   1        LCD_ShowString(1, 1, "Password: ");
+  25   1        
+  26   1        while(1)
+  27   1        {
+  28   2          key = matrixKey();
+  29   2          if(key)
+  30   2          {
+  31   3            count++;
+  32   3            if (key <= 10 && count <= 4)
+  33   3            {
+  34   4              passtry *= 10;
+  35   4              passtry += key % 10;
+  36   4            } else if (key == 11)
+  37   3            {
+  38   4              if (passtry == password)
+  39   4              {
+  40   5                LCD_ShowString(1, 14, "OK");
+  41   5              } else
+  42   4              {
+  43   5                LCD_ShowString(1, 14, "NO");
+  44   5              }
+  45   4              count = 0;
+  46   4              passtry = 0;
+  47   4            } else if (key == 12)
+  48   3            {
+  49   4              count = 0;
+  50   4              passtry = 0;
+  51   4              
+  52   4            }
+  53   3            LCD_ShowNum(2, 1, passtry, 4);
+  54   3            
+C51 COMPILER V9.60.7.0   MAIN                                                              12/23/2024 07:35:45 PAGE 2   
+
+  55   3            
+  56   3          }
+  57   2        }
+  58   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    169    ----
+   CONSTANT SIZE    =     17    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\LCD1602.obj",
+".\Objects\MatrixKey.obj" 
+TO ".\Objects\Matrix_button" 
+PRINT(".\Listings\Matrix_button.m51") RAMSIZE(256) 

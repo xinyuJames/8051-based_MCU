@@ -1,0 +1,90 @@
+C51 COMPILER V9.60.7.0   MATRIXKEY                                                         12/23/2024 04:48:04 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MATRIXKEY
+OBJECT MODULE PLACED IN .\Objects\MatrixKey.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE MatrixKey.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\MatrixKey.lst) TABS(2) OBJECT(.\Objects\MatrixKey.obj)
+
+line level    source
+
+   1          /*
+   2          Source codes for matrix keys
+   3          
+   4          ps. so sad that I cannot use array to store them, whats a quicker way?
+   5          */
+   6          #include <REGX52.H>
+   7          #include "Delay.h"
+   8          
+   9          unsigned char matrixKey()
+  10          {
+  11   1        unsigned char key = 0;
+  12   1      //  
+  13   1      //  unsigned char *columns[4] = {&P1_3, &P1_2, &P1_1, &P1_0};
+  14   1      //  unsigned char *rows[4] = {&P1_7, &P1_6, &P1_5, &P1_4};
+  15   1      //  unsigned char keys[4][4] = {{1, 2, 3, 4},{5, 6, 7, 8},{9, 10, 11, 12}, {13, 14, 15, 16}};
+  16   1      //  
+  17   1      //  for (int i = 0; i < 4; i++)
+  18   1      //  {
+  19   1      //    P1 = 0xFF;
+  20   1      //    *columns[i] = 0;
+  21   1      //    for (int j = 0; j < 4, j++)
+  22   1      //    {
+  23   1      //      if (*rows[j] == 0)
+  24   1      //      {
+  25   1      //        Delay(20);
+  26   1      //        while(*row[j] == 0);
+  27   1      //        Delay(20);
+  28   1      //        
+  29   1      //        key = keys[i][j];
+  30   1      //      }
+  31   1      //      
+  32   1      //    }
+  33   1      //  }
+  34   1      
+  35   1        P1 = 0xFF;
+  36   1        P1_3 = 0;
+  37   1        if (P1_7 == 0) {Delay(20); while(P1_7 == 0){Delay(20); key = 1;}}
+  38   1        if (P1_6 == 0) {Delay(20); while(P1_6 == 0){Delay(20); key = 5;}}
+  39   1        if (P1_5 == 0) {Delay(20); while(P1_5 == 0){Delay(20); key = 9;}}
+  40   1        if (P1_4 == 0) {Delay(20); while(P1_4 == 0){Delay(20); key = 13;}}
+  41   1        
+  42   1        P1 = 0xFF;
+  43   1        P1_2 = 0;
+  44   1        if (P1_7 == 0) {Delay(20); while(P1_7 == 0){Delay(20); key = 2;}}
+  45   1        if (P1_6 == 0) {Delay(20); while(P1_6 == 0){Delay(20); key = 6;}}
+  46   1        if (P1_5 == 0) {Delay(20); while(P1_5 == 0){Delay(20); key = 10;}}
+  47   1        if (P1_4 == 0) {Delay(20); while(P1_4 == 0){Delay(20); key = 14;}}
+  48   1        
+  49   1        P1 = 0xFF;
+  50   1        P1_1 = 0;
+  51   1        if (P1_7 == 0) {Delay(20); while(P1_7 == 0){Delay(20); key = 3;}}
+  52   1        if (P1_6 == 0) {Delay(20); while(P1_6 == 0){Delay(20); key = 7;}}
+  53   1        if (P1_5 == 0) {Delay(20); while(P1_5 == 0){Delay(20); key = 11;}}
+  54   1        if (P1_4 == 0) {Delay(20); while(P1_4 == 0){Delay(20); key = 15;}}
+C51 COMPILER V9.60.7.0   MATRIXKEY                                                         12/23/2024 04:48:04 PAGE 2   
+
+  55   1        
+  56   1        P1 = 0xFF;
+  57   1        P1_0 = 0;
+  58   1        if (P1_7 == 0) {Delay(20); while(P1_7 == 0){Delay(20); key = 4;}}
+  59   1        if (P1_6 == 0) {Delay(20); while(P1_6 == 0){Delay(20); key = 8;}}
+  60   1        if (P1_5 == 0) {Delay(20); while(P1_5 == 0){Delay(20); key = 12;}}
+  61   1        if (P1_4 == 0) {Delay(20); while(P1_4 == 0){Delay(20); key = 16;}}
+  62   1        
+  63   1        return key;
+  64   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    425    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
