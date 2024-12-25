@@ -1,0 +1,72 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              12/22/2024 09:35:51 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /*
+   2          Xinyu Liu self-taught 8051 MCU
+   3          Description: this program can control nixie light show up many digits.
+   4          Version@2024/12/22
+   5          Let's goooo, I like this one
+   6          */
+   7          
+   8          #include <REGX52.H>
+   9          #include <INTRINS.H>
+  10          #include "Header_Delay.h"
+  11          
+  12          void showDigit(unsigned int, unsigned int, int[], int[]);
+  13          
+  14          void main()
+  15          {
+  16   1        int positionSet[8] = {111, 110, 101, 100, 11, 10, 1, 0}; //position from first to last
+  17   1        int numTable[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F}; //numbers from 0-9
+  18   1        while(1)
+  19   1        {
+  20   2          showDigit(1, 8, positionSet, numTable);
+  21   2          //Delay(20);
+  22   2          showDigit(2, 7, positionSet, numTable);
+  23   2          //Delay(20);
+  24   2          showDigit(3, 6, positionSet, numTable);
+  25   2          //Delay(20);
+  26   2          showDigit(4, 5, positionSet, numTable);
+  27   2      //    showDigit(5, 4, positionSet, numTable);
+  28   2      //    showDigit(6, 3, positionSet, numTable);
+  29   2      //    showDigit(7, 2, positionSet, numTable);
+  30   2      //    showDigit(8, 1, positionSet, numTable);
+  31   2        }
+  32   1        
+  33   1      }
+  34          
+  35          //show up one digit of number in assigned location with tables initialized
+  36          void showDigit(unsigned int position, number, int positionSet[], int numTable[])
+  37          {
+*** WARNING C235 IN LINE 37 OF main.c: parameter 2: different types
+  38   1        P2_2 = positionSet[position - 1] % 10;
+  39   1        P2_3 = positionSet[position - 1] % 100 / 10;
+  40   1        P2_4 = positionSet[position - 1] / 100;
+  41   1        
+  42   1        P0 = numTable[number];
+  43   1        Delay(1);
+  44   1        P0 = 0x00; //zero it before move on to the next
+  45   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    297    ----
+   CONSTANT SIZE    =     36    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      46
+C51 COMPILER V9.60.7.0   MAIN                                                              12/22/2024 09:35:51 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

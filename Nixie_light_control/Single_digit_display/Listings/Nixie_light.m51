@@ -1,0 +1,131 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    12/22/2024  08:27:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+D:\C51V961\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\Nixie_light PRINT (.\Listings\Nixie_light.m51) RAMSIZE (256)
+>> 
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  D:\C51V961\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?COPY)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?SIDIV)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?ILDOPTR)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\Nixie_light (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     002EH     UNIT         _DATA_GROUP_
+            IDATA   0036H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     01B9H     UNIT         ?C?LIB_CODE
+            CODE    09B9H     0099H     UNIT         ?PR?_SHOWDIGIT?MAIN
+            CODE    0A52H     0042H     UNIT         ?PR?MAIN?MAIN
+            CODE    0A94H     0024H     UNIT         ?CO?MAIN
+            CODE    0AB8H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Nixie_light (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0008H    0024H
+  +--> ?CO?MAIN
+  +--> ?PR?_SHOWDIGIT?MAIN
+
+?PR?_SHOWDIGIT?MAIN            002CH    000AH
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Nixie_light (MAIN)
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/22/2024  08:27:49  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+  B:00A0H.4       PUBLIC        P2_4
+  C:0A52H         PUBLIC        main
+  C:09B9H         PUBLIC        _showDigit
+  C:0A94H         SYMBOL        _?ix1000
+  C:0AA4H         SYMBOL        _?ix1001
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        positionSet
+  D:0018H         SYMBOL        numTable
+  -------         ENDDO         
+  C:0A52H         LINE#         12
+  C:0A52H         LINE#         13
+  C:0A52H         LINE#         14
+  C:0A65H         LINE#         15
+  C:0A78H         LINE#         16
+  C:0A78H         LINE#         17
+  C:0A78H         LINE#         18
+  C:0A92H         LINE#         19
+  -------         ENDPROC       MAIN
+  -------         PROC          _SHOWDIGIT
+  D:002CH         SYMBOL        position
+  D:002EH         SYMBOL        number
+  D:0030H         SYMBOL        positionSet
+  D:0033H         SYMBOL        numTable
+  C:09B9H         LINE#         24
+  C:09C7H         LINE#         25
+  C:09C7H         LINE#         26
+  C:09F1H         LINE#         27
+  C:0A0FH         LINE#         28
+  C:0A3AH         LINE#         30
+  C:0A51H         LINE#         31
+  -------         ENDPROC       _SHOWDIGIT
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?COPY
+  C:08D0H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?SIDIV
+  C:08F6H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?ILDOPTR
+  C:092CH         PUBLIC        ?C?ILDOPTR
+  -------         ENDMOD        ?C?ILDOPTR
+
+  -------         MODULE        ?C?UIDIV
+  C:0964H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/22/2024  08:27:49  PAGE 3
+
+
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00FFH BYTE (12%) *
+******************************************************************************
+
+Program Size: data=55.0 xdata=0 code=711
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

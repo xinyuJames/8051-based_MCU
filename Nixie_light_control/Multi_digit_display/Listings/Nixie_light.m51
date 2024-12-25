@@ -1,0 +1,167 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    12/22/2024  09:35:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+D:\C51V961\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\Delay.obj TO .\Objects\Nixie_light PRINT (.\Listings\Nixie_lig
+>> ht.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  .\Objects\Delay.obj (DELAY)
+  D:\C51V961\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?COPY)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?SIDIV)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?ILDOPTR)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\Nixie_light (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     002EH     UNIT         _DATA_GROUP_
+            IDATA   0036H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     01B9H     UNIT         ?C?LIB_CODE
+            CODE    09B9H     00ADH     UNIT         ?PR?_SHOWDIGIT?MAIN
+            CODE    0A66H     007CH     UNIT         ?PR?MAIN?MAIN
+            CODE    0AE2H     0024H     UNIT         ?CO?MAIN
+            CODE    0B06H     0018H     UNIT         ?PR?_DELAY?DELAY
+            CODE    0B1EH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Nixie_light (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0008H    0024H
+  +--> ?CO?MAIN
+  +--> ?PR?_SHOWDIGIT?MAIN
+
+?PR?_SHOWDIGIT?MAIN            002CH    000AH
+  +--> ?PR?_DELAY?DELAY
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/22/2024  09:35:51  PAGE 2
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Nixie_light (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+  B:00A0H.4       PUBLIC        P2_4
+  C:0A66H         PUBLIC        main
+  C:09C3H         PUBLIC        _showDigit
+  C:0AE2H         SYMBOL        _?ix1000
+  C:0AF2H         SYMBOL        _?ix1001
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        positionSet
+  D:0018H         SYMBOL        numTable
+  -------         ENDDO         
+  C:0A66H         LINE#         14
+  C:0A66H         LINE#         15
+  C:0A66H         LINE#         16
+  C:0A79H         LINE#         17
+  C:0A8CH         LINE#         18
+  C:0A8CH         LINE#         19
+  C:0A8CH         LINE#         20
+  C:0A9CH         LINE#         22
+  C:0AACH         LINE#         24
+  C:0AC6H         LINE#         26
+  C:0AE0H         LINE#         31
+  -------         ENDPROC       MAIN
+  -------         PROC          L?0005
+  -------         ENDPROC       L?0005
+  -------         PROC          _SHOWDIGIT
+  D:002CH         SYMBOL        position
+  D:002EH         SYMBOL        number
+  D:0030H         SYMBOL        positionSet
+  D:0033H         SYMBOL        numTable
+  C:09C3H         LINE#         36
+  C:09D1H         LINE#         37
+  C:09D1H         LINE#         38
+  C:09FBH         LINE#         39
+  C:0A19H         LINE#         40
+  C:0A44H         LINE#         42
+  C:0A5BH         LINE#         43
+  C:0A62H         LINE#         44
+  C:0A65H         LINE#         45
+  -------         ENDPROC       _SHOWDIGIT
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0B06H         PUBLIC        _Delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        xms
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/22/2024  09:35:51  PAGE 3
+
+
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0B06H         LINE#         7
+  C:0B06H         LINE#         8
+  C:0B06H         LINE#         11
+  C:0B10H         LINE#         12
+  C:0B10H         LINE#         13
+  C:0B11H         LINE#         14
+  C:0B12H         LINE#         15
+  C:0B13H         LINE#         16
+  C:0B15H         LINE#         17
+  C:0B17H         LINE#         19
+  C:0B17H         LINE#         20
+  C:0B19H         LINE#         21
+  C:0B1BH         LINE#         22
+  C:0B1DH         LINE#         23
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        ?C?COPY
+  C:08D0H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?SIDIV
+  C:08F6H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?ILDOPTR
+  C:092CH         PUBLIC        ?C?ILDOPTR
+  -------         ENDMOD        ?C?ILDOPTR
+
+  -------         MODULE        ?C?UIDIV
+  C:0964H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0165H BYTE (17%) *
+******************************************************************************
+
+Program Size: data=55.0 xdata=0 code=813
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

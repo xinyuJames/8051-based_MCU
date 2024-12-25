@@ -1,0 +1,56 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              12/22/2024 08:27:49 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /*
+   2          Xinyu Liu self-taught 8051 MCU
+   3          Description: this program can control nixie light show up any digit in any position.
+   4          Version@2024/12/22
+   5          */
+   6          
+   7          #include <REGX52.H>
+   8          #include <INTRINS.H>
+   9          
+  10          void showDigit(unsigned int, unsigned int, int[], int[]);
+  11          
+  12          void main()
+  13          {
+  14   1        int positionSet[8] = {0, 1, 10, 11, 100, 101, 110, 111}; //position from first to last
+  15   1        int numTable[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F}; //numbers from 0-9
+  16   1        while(1)
+  17   1        {
+  18   2          showDigit(1, 9, positionSet, numTable);
+  19   2        }
+  20   1        
+  21   1      }
+  22          
+  23          //show up one digit of number in assigned location with tables initialized
+  24          void showDigit(unsigned int position, number, int positionSet[], int numTable[])
+  25          {
+*** WARNING C235 IN LINE 25 OF main.c: parameter 2: different types
+  26   1        P2_4 = positionSet[8-position] % 10;
+  27   1        P2_3 = positionSet[8-position] % 100 / 10;
+  28   1        P2_2 = positionSet[8-position] / 100;
+  29   1        
+  30   1        P0 = numTable[number];
+  31   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    219    ----
+   CONSTANT SIZE    =     36    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      46
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

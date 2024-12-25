@@ -1,0 +1,5 @@
+".\Objects\Delay.obj",
+".\Objects\main.obj",
+".\Objects\SerialCommunication.obj" 
+TO ".\Objects\Computer_LED" 
+PRINT(".\Listings\Computer_LED.m51") RAMSIZE(256) 

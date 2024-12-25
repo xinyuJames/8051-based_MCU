@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\Nixie_light" 
+PRINT(".\Listings\Nixie_light.m51") RAMSIZE(256) 
