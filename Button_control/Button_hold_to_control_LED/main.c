@@ -1,8 +1,3 @@
-/*
-Xinyu Liu self-taught 8051 MCU
-Description: this program can accomplish that holding leftmost button so LED can light up.
-Version@2024/12/21
-*/
 #include <REGX52.H>
 #include <INTRINS.H>
 

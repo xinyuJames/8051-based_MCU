@@ -1,8 +1,3 @@
-/*
-Xinyu Liu self-taught 8051 MCU
-Description: this program can accomplish one click of button to change status of LED.
-Version@2024/12/22
-*/
 #include <REGX52.H>
 #include <INTRINS.H>
 
