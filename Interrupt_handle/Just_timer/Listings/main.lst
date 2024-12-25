@@ -1,0 +1,82 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              12/25/2024 02:47:04 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include <INTRINS.H>
+   3          #include "LCD1602.h"
+   4          #include "Delay.h"
+   5          #include "Timer0.h"
+   6          
+   7          unsigned int sec = 0;
+   8          unsigned int min = 0;
+   9          unsigned int hour = 0;
+  10          
+  11          void main()
+  12          {
+  13   1        LCD_Init();
+  14   1        Timer0_Init();
+  15   1        
+  16   1        LCD_ShowString(1, 1, "Timer:");
+  17   1        while(1)
+  18   1        {
+  19   2          LCD_ShowNum(2, 1, hour, 2);
+  20   2          LCD_ShowString(2, 3, ":");
+  21   2          LCD_ShowNum(2, 4, min, 2);
+  22   2          LCD_ShowString(2, 6, ":");
+  23   2          LCD_ShowNum(2,7, sec, 2);
+  24   2        }
+  25   1      }
+  26          
+  27          void Timer0_Routine() interrupt 1
+  28          {
+  29   1        static unsigned int count;
+  30   1        
+  31   1        TL0 = 0x66;
+  32   1        TH0 = 0xFC;
+  33   1        
+  34   1        
+  35   1        count++;
+  36   1        while(count >= 1000)
+  37   1        {
+  38   2          
+  39   2          count = 0;
+  40   2          
+  41   2          sec++;
+  42   2          
+  43   2          if (sec >= 60)
+  44   2          {
+  45   3            min++;
+  46   3            sec = 0;
+  47   3          }
+  48   2          
+  49   2          if (min >= 60)
+  50   2          {
+  51   3            hour++;
+  52   3            min = 0;
+  53   3          }
+  54   2          
+C51 COMPILER V9.60.7.0   MAIN                                                              12/25/2024 02:47:04 PAGE 2   
+
+  55   2        }
+  56   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    186    ----
+   CONSTANT SIZE    =      9    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
