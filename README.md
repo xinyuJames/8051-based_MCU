@@ -4,12 +4,12 @@
 
 This repository documents my journey of learning and developing projects with 8051.
 
-If you wanna execute them, use .c files and run them at following setup...
+If you wanna execute them, use files and run them at following setup...
 
 ## Development setup:
 ### Hardware:
 - **Microcontroller**: STC89C516RD+ (8051 architecture)
-- **Development Board**: PRECHIN51 A7
+- **Development Board**: PRECHIN51 A4
 - **Windows Laptop**: Just a simple laptop
 - **Additional**: LEDs, resistors, jumper wires, etc.
 
