@@ -1,0 +1,47 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              12/26/2024 04:26:38 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /*
+   2          Xinyu Liu self-taught 8051 MCU
+   3          Description: this program can control matrix LED to show words and make them roll
+   4          Version@2024/12/25
+   5          
+   6          using new concept of Shift Register for matrix LED, pretty cool
+   7          */
+   8          
+   9          #include <REGX52.H>
+  10          #include <INTRINS.H>
+  11          #include "Delay_s.h"
+  12          #include "MatrixLED.h"
+  13          #include "MLED_Lib.h"
+  14          
+  15          void main()
+  16          {
+  17   1        MLED_Init();
+  18   1        
+  19   1        while(1)
+  20   1        {
+  21   2          MLEDShow_HELLO();
+  22   2        }
+  23   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      8    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

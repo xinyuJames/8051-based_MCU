@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\Delay_s.obj",
+".\Objects\MatrixLED.obj",
+".\Objects\MLED_Lib.obj" 
+TO ".\Objects\Matrix_LED" 
+PRINT(".\Listings\Matrix_LED.m51") RAMSIZE(256) 

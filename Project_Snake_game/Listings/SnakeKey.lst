@@ -1,0 +1,26 @@
+C51 COMPILER V9.60.7.0   SNAKEKEY                                                          12/27/2024 11:44:44 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SNAKEKEY
+OBJECT MODULE PLACED IN .\Objects\SnakeKey.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE SnakeKey.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -SnakeKey.lst) TABS(2) OBJECT(.\Objects\SnakeKey.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "MatrixKey.h"
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
