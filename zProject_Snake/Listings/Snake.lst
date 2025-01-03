@@ -1,0 +1,245 @@
+C51 COMPILER V9.60.7.0   SNAKE                                                             01/03/2025 06:01:55 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SNAKE
+OBJECT MODULE PLACED IN .\Objects\Snake.obj
+COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE Snake.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\Sna
+                    -ke.lst) TABS(2) OBJECT(.\Objects\Snake.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include <INTRINS.H>
+   3          #include <STDLIB.H>
+   4          #include "MatrixLED.h"
+   5          
+   6          #define WINSCORE 32
+   7          
+   8          //coordinate of snake start from (1,1), x and y
+   9          xdata unsigned char snake[64][2] = {{1, 1}, {1, 2}};
+  10          unsigned char food[2];
+  11          unsigned char previousHeadNode[2];
+  12          unsigned char previousNode[2];
+  13          unsigned char snakeLen = 2;
+  14          unsigned char gameOver;
+  15          unsigned char gameWin = 0;
+  16          
+  17          void eat(); 
+  18          void generateFood();
+  19          void isCollide();
+  20          
+  21          //initialize snake
+  22          void Snake_Init()
+  23          {
+  24   1        generateFood();
+  25   1      }
+  26          
+  27          //restart the snake game, reset parameters
+  28          void snakeRestart()
+  29          {
+  30   1        unsigned int i;
+  31   1        for (i = 0; i < 64; i++)
+  32   1        {
+  33   2          if (i == 0) {snake[i][0] = 1; snake[i][1] = 1;}
+  34   2          else if (i == 1) {snake[i][0] = 1; snake[i][1] = 2;}
+  35   2          else {snake[i][0] = 0; snake[i][1] = 0;}
+  36   2        }
+  37   1        snakeLen = 2;
+  38   1        gameOver = 0;
+  39   1        gameWin = 0;
+  40   1      }
+  41          
+  42          //show snake body to the screen
+  43          void showSnake()
+  44          {
+  45   1        unsigned char i;
+  46   1        for (i = 0; i < snakeLen; i++)
+  47   1        {
+  48   2          MLED_ShowPoint(snake[i][0], snake[i][1]);
+  49   2        }
+  50   1        
+  51   1        MLED_ShowPoint(food[0], food[1]);
+  52   1      }
+  53            
+  54          //all the functions below should modify snake array in one unit of time
+C51 COMPILER V9.60.7.0   SNAKE                                                             01/03/2025 06:01:55 PAGE 2   
+
+  55          void bodyFollow()
+  56          {
+  57   1        unsigned int i;
+  58   1        
+  59   1        for (i = 0; i < snakeLen - 2; i++)
+  60   1        {
+  61   2          snake[i][0] = snake[i+1][0];
+  62   2          snake[i][1] = snake[i+1][1];
+  63   2        }
+  64   1        snake[snakeLen - 2][0] = previousHeadNode[0];
+  65   1        snake[snakeLen - 2][1] = previousHeadNode[1];
+  66   1      } 
+  67          
+  68          void moveUp()
+  69          {
+  70   1        //store previous node
+  71   1        previousNode[0] = snake[0][0];
+  72   1        previousNode[1] = snake[0][1];
+  73   1        //store previous head node
+  74   1        previousHeadNode[0] = snake[snakeLen - 1][0];
+  75   1        previousHeadNode[1] = snake[snakeLen - 1][1];
+  76   1        //head of snake move up
+  77   1        snake[snakeLen - 1][1] += 1;
+  78   1        //the body follow up with head
+  79   1        bodyFollow();
+  80   1        isCollide();
+  81   1        //see if snake can eat
+  82   1        eat();
+  83   1      }
+  84          
+  85          void moveDown()
+  86          {
+  87   1        previousNode[0] = snake[0][0];
+  88   1        previousNode[1] = snake[0][1];
+  89   1        previousHeadNode[0] = snake[snakeLen - 1][0];
+  90   1        previousHeadNode[1] = snake[snakeLen - 1][1];
+  91   1        snake[snakeLen - 1][1] -= 1;
+  92   1        bodyFollow();
+  93   1        isCollide();
+  94   1        eat();
+  95   1      }
+  96          
+  97          void moveLeft()
+  98          {
+  99   1        previousNode[0] = snake[0][0];
+ 100   1        previousNode[1] = snake[0][1];
+ 101   1        previousHeadNode[0] = snake[snakeLen - 1][0];
+ 102   1        previousHeadNode[1] = snake[snakeLen - 1][1];
+ 103   1        snake[snakeLen - 1][0] -= 1;
+ 104   1        bodyFollow();
+ 105   1        isCollide();
+ 106   1        eat();
+ 107   1      }
+ 108          
+ 109          void moveRight()
+ 110          {
+ 111   1        previousNode[0] = snake[0][0];
+ 112   1        previousNode[1] = snake[0][1];
+ 113   1        previousHeadNode[0] = snake[snakeLen - 1][0];
+ 114   1        previousHeadNode[1] = snake[snakeLen - 1][1];
+ 115   1        snake[snakeLen - 1][0] += 1;
+ 116   1        bodyFollow();
+C51 COMPILER V9.60.7.0   SNAKE                                                             01/03/2025 06:01:55 PAGE 3   
+
+ 117   1        isCollide();
+ 118   1        eat();
+ 119   1      }
+ 120          
+ 121          //determine if has food, and eat if yes, and then generate new food
+ 122          void eat()
+ 123          {
+ 124   1        unsigned int i;
+ 125   1        
+ 126   1        if (snake[snakeLen - 1][0] == food[0] && snake[snakeLen - 1][1] == food[1])
+ 127   1        {
+ 128   2          //snake array enlength a unit
+ 129   2          for (i = snakeLen; i > 0; i--)
+ 130   2          {
+ 131   3            snake[i][0] = snake[i - 1][0];
+ 132   3            snake[i][1] = snake[i - 1][1];
+ 133   3          }
+ 134   2          //add in the previous node to tail
+ 135   2          snake[0][0] = previousNode[0];
+ 136   2          snake[0][1] = previousNode[1];
+ 137   2          
+ 138   2          snakeLen++;
+ 139   2          
+ 140   2          if (snakeLen == WINSCORE)
+ 141   2          {
+ 142   3            gameOver = 1;
+ 143   3            gameWin = 1;
+ 144   3          } else
+ 145   2          {
+ 146   3            generateFood();
+ 147   3          }
+ 148   2          
+ 149   2        }
+ 150   1      }
+ 151          
+ 152          //determine if snake collide with itself or wall
+ 153          void isCollide()
+ 154          {
+ 155   1        unsigned int i;
+ 156   1        
+ 157   1        
+ 158   1        if (snake[snakeLen - 1][0] > 8 || snake[snakeLen - 1][0] <= 0 || snake[snakeLen - 1][1] > 8 || snake[snak
+             -eLen - 1][1] <= 0)
+ 159   1        {
+ 160   2          gameOver = 1;
+ 161   2        }
+ 162   1        
+ 163   1        for (i = 0; i < snakeLen - 1; i++)
+ 164   1        {
+ 165   2          if (snake[snakeLen - 1][0] == snake[i][0] && snake[snakeLen - 1][1] == snake[i][1])
+ 166   2          {
+ 167   3            gameOver = 1;
+ 168   3            break;
+ 169   3          }
+ 170   2        }
+ 171   1      }
+ 172          
+ 173          unsigned char isOver()
+ 174          {
+ 175   1        return gameOver;
+ 176   1      }
+ 177          
+C51 COMPILER V9.60.7.0   SNAKE                                                             01/03/2025 06:01:55 PAGE 4   
+
+ 178          unsigned char isWin()
+ 179          {
+ 180   1        return gameWin;
+ 181   1      }
+ 182          
+ 183          void generateFood()
+ 184          {
+ 185   1        unsigned char newX, newY, isOverlap, i;
+ 186   1        
+ 187   1        do
+ 188   1        {
+ 189   2          //make sure x and y range from 1-8
+ 190   2          newX = (rand() % 8) + 1;
+ 191   2          newY = (rand() % 8) + 1;
+ 192   2          
+ 193   2          //make sure new food is not overlapping body
+ 194   2          isOverlap = 0;
+ 195   2          for (i = 0; i < snakeLen; i++)
+ 196   2          {
+ 197   3            if (snake[i][0] == newX && snake[i][1] == newY)
+ 198   3            {
+ 199   4              isOverlap = 1;
+ 200   4              break;
+ 201   4            }
+ 202   3          }
+ 203   2          
+ 204   2        } while(isOverlap);
+ 205   1        
+ 206   1        //assign value to food
+ 207   1        food[0] = newX;
+ 208   1        food[1] = newY;
+ 209   1      }
+ 210          
+ 211          unsigned char getScore()
+ 212          {
+ 213   1        return snakeLen;
+ 214   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    937    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    128    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
