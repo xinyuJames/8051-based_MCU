@@ -1,0 +1,408 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    01/03/2025  10:07:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+D:\C51V961\C51\BIN\BL51.EXE .\Objects\Delay.obj, .\Objects\main.obj, .\Objects\Timer0.obj, .\Objects\Music.obj TO .\Obje
+>> cts\buzzer PRINT (.\Listings\buzzer.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Delay.obj (DELAY)
+  .\Objects\main.obj (MAIN)
+  .\Objects\Timer0.obj (TIMER0)
+  .\Objects\Music.obj (MUSIC)
+  D:\C51V961\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\C51V961\C51\LIB\C51S.LIB (?C?IMUL)
+  D:\C51V961\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\buzzer (DELAY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     005CH     UNIT         ?DT?MUSIC
+            IDATA   0064H     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     03D2H     UNIT         ?XD?MUSIC
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     UNIT         ?PR?BUZZ?MUSIC
+                    0006H     0005H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0435H     UNIT         ?C_INITSEG
+            CODE    0443H     03DDH     UNIT         ?PR?MUSICUPDATE?MUSIC
+            CODE    0820H     0280H     UNIT         ?CO?MUSIC
+            CODE    0AA0H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0B2CH     0045H     UNIT         ?PR?TIMER0_ROUTINE?MAIN
+            CODE    0B71H     0017H     UNIT         ?PR?TIMER0_INIT?TIMER0
+            CODE    0B88H     0016H     UNIT         ?PR?_DELAY?DELAY
+            CODE    0B9EH     0014H     UNIT         ?PR?_MUSICSELECT?MUSIC
+            CODE    0BB2H     0012H     UNIT         ?C?LIB_CODE
+            CODE    0BC4H     000EH     UNIT         ?PR?FREQHUPDATE?MUSIC
+            CODE    0BD2H     000DH     UNIT         ?PR?MAIN?MAIN
+            CODE    0BDFH     000DH     UNIT         ?PR?FREQLUPDATE?MUSIC
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\buzzer (DELAY)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/03/2025  10:07:41  PAGE 2
+
+
+?PR?TIMER0_ROUTINE?MAIN
+  +--> ?PR?FREQLUPDATE?MUSIC
+  +--> ?PR?FREQHUPDATE?MUSIC
+  +--> ?PR?BUZZ?MUSIC
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?TIMER0
+  +--> ?PR?_MUSICSELECT?MUSIC
+  +--> ?PR?MUSICUPDATE?MUSIC
+
+?PR?MUSICUPDATE?MUSIC
+  +--> ?PR?_DELAY?DELAY
+  +--> ?CO?MUSIC
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\buzzer (DELAY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0B88H         PUBLIC        _Delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0B88H         LINE#         7
+  C:0B88H         LINE#         8
+  C:0B88H         LINE#         10
+  C:0B92H         LINE#         11
+  C:0B92H         LINE#         12
+  C:0B93H         LINE#         13
+  C:0B95H         LINE#         14
+  C:0B97H         LINE#         16
+  C:0B97H         LINE#         17
+  C:0B99H         LINE#         18
+  C:0B9BH         LINE#         19
+  C:0B9DH         LINE#         20
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0B2CH         PUBLIC        Timer0_Routine
+  C:0BD2H         PUBLIC        main
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/03/2025  10:07:41  PAGE 3
+
+
+  -------         PROC          MAIN
+  C:0BD2H         LINE#         6
+  C:0BD2H         LINE#         7
+  C:0BD2H         LINE#         8
+  C:0BD5H         LINE#         9
+  C:0BDAH         LINE#         10
+  C:0BDAH         LINE#         11
+  C:0BDAH         LINE#         12
+  C:0BDDH         LINE#         13
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0_ROUTINE
+  C:0B2CH         LINE#         16
+  C:0B49H         LINE#         19
+  C:0B4EH         LINE#         20
+  C:0B53H         LINE#         22
+  C:0B56H         LINE#         23
+  -------         ENDPROC       TIMER0_ROUTINE
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        TIMER0
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A8H.7       PUBLIC        EA
+  C:0B71H         PUBLIC        Timer0_Init
+  D:0089H         PUBLIC        TMOD
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:00B8H.1       PUBLIC        PT0
+  B:0088H.4       PUBLIC        TR0
+  -------         PROC          TIMER0_INIT
+  C:0B71H         LINE#         9
+  C:0B71H         LINE#         10
+  C:0B71H         LINE#         12
+  C:0B74H         LINE#         13
+  C:0B77H         LINE#         14
+  C:0B79H         LINE#         15
+  C:0B7BH         LINE#         20
+  C:0B7EH         LINE#         21
+  C:0B81H         LINE#         24
+  C:0B83H         LINE#         25
+  C:0B85H         LINE#         27
+  C:0B87H         LINE#         28
+  -------         ENDPROC       TIMER0_INIT
+  -------         ENDMOD        TIMER0
+
+  -------         MODULE        MUSIC
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0B9EH         PUBLIC        _musicSelect
+  C:0443H         PUBLIC        musicUpdate
+  B:00A0H.0       PUBLIC        P2_0
+  B:00A0H.1       PUBLIC        P2_1
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+  D:0008H         PUBLIC        freqTable
+  B:00A0H.5       PUBLIC        buzzer
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/03/2025  10:07:41  PAGE 4
+
+
+  D:005CH         PUBLIC        musicNode
+  D:005EH         PUBLIC        freqNode
+  D:0060H         PUBLIC        musicMove
+  C:0003H         PUBLIC        buzz
+  X:0000H         PUBLIC        music1
+  X:0002H         PUBLIC        music2
+  B:0088H.4       PUBLIC        TR0
+  X:0230H         PUBLIC        music3
+  C:0820H         PUBLIC        music4
+  C:0976H         PUBLIC        music5
+  C:0BC4H         PUBLIC        freqHUpdate
+  C:0BDFH         PUBLIC        freqLUpdate
+  D:0062H         PUBLIC        musicChoice
+  -------         PROC          _MUSICSELECT
+  D:0007H         SYMBOL        selection
+  C:0B9EH         LINE#         754
+  C:0B9EH         LINE#         755
+  C:0B9EH         LINE#         756
+  C:0BA1H         LINE#         757
+  C:0BA1H         LINE#         758
+  C:0BA7H         LINE#         759
+  C:0BABH         LINE#         760
+  C:0BABH         LINE#         761
+  C:0BB1H         LINE#         762
+  C:0BB1H         LINE#         763
+  -------         ENDPROC       _MUSICSELECT
+  -------         PROC          MUSICUPDATE
+  C:0443H         LINE#         765
+  C:0443H         LINE#         766
+  C:0443H         LINE#         767
+  C:044EH         LINE#         768
+  C:044EH         LINE#         769
+  C:046DH         LINE#         770
+  C:046DH         LINE#         771
+  C:0471H         LINE#         772
+  C:0471H         LINE#         774
+  C:0479H         LINE#         775
+  C:047BH         LINE#         776
+  C:049BH         LINE#         777
+  C:049DH         LINE#         778
+  C:04A5H         LINE#         780
+  C:04A5H         LINE#         781
+  C:04A5H         LINE#         782
+  C:04A5H         LINE#         783
+  C:04A8H         LINE#         784
+  C:04A8H         LINE#         785
+  C:04C2H         LINE#         786
+  C:04CAH         LINE#         787
+  C:04EAH         LINE#         788
+  C:04F2H         LINE#         790
+  C:04F2H         LINE#         791
+  C:04F2H         LINE#         792
+  C:04F2H         LINE#         793
+  C:04F2H         LINE#         795
+  C:04F5H         LINE#         796
+  C:04F5H         LINE#         797
+  C:04F7H         LINE#         798
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/03/2025  10:07:41  PAGE 5
+
+
+  C:04F9H         LINE#         799
+  C:04F9H         LINE#         801
+  C:0504H         LINE#         802
+  C:0504H         LINE#         803
+  C:050DH         LINE#         804
+  C:050DH         LINE#         805
+  C:052CH         LINE#         806
+  C:052CH         LINE#         807
+  C:052EH         LINE#         808
+  C:0532H         LINE#         809
+  C:0532H         LINE#         811
+  C:053AH         LINE#         812
+  C:053CH         LINE#         813
+  C:055CH         LINE#         814
+  C:055EH         LINE#         815
+  C:0566H         LINE#         817
+  C:0566H         LINE#         818
+  C:0566H         LINE#         819
+  C:0566H         LINE#         820
+  C:0569H         LINE#         821
+  C:0569H         LINE#         822
+  C:0583H         LINE#         823
+  C:058BH         LINE#         824
+  C:05ABH         LINE#         825
+  C:05B3H         LINE#         827
+  C:05B3H         LINE#         828
+  C:05B3H         LINE#         829
+  C:05B3H         LINE#         830
+  C:05B3H         LINE#         832
+  C:05B6H         LINE#         833
+  C:05B6H         LINE#         834
+  C:05BCH         LINE#         835
+  C:05C1H         LINE#         836
+  C:05C3H         LINE#         837
+  C:05C3H         LINE#         838
+  C:05CFH         LINE#         839
+  C:05CFH         LINE#         840
+  C:05EEH         LINE#         841
+  C:05EEH         LINE#         842
+  C:05F0H         LINE#         843
+  C:05F4H         LINE#         844
+  C:05F4H         LINE#         846
+  C:05FCH         LINE#         847
+  C:05FEH         LINE#         848
+  C:061EH         LINE#         849
+  C:0620H         LINE#         850
+  C:0628H         LINE#         852
+  C:0628H         LINE#         853
+  C:0628H         LINE#         854
+  C:0628H         LINE#         855
+  C:062BH         LINE#         856
+  C:062BH         LINE#         857
+  C:0645H         LINE#         858
+  C:064DH         LINE#         859
+  C:066DH         LINE#         860
+  C:0675H         LINE#         862
+  C:0675H         LINE#         863
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/03/2025  10:07:41  PAGE 6
+
+
+  C:0675H         LINE#         864
+  C:0675H         LINE#         865
+  C:0675H         LINE#         867
+  C:0678H         LINE#         868
+  C:0678H         LINE#         869
+  C:067EH         LINE#         870
+  C:0683H         LINE#         871
+  C:0685H         LINE#         872
+  C:0685H         LINE#         873
+  C:0691H         LINE#         874
+  C:0691H         LINE#         875
+  C:06B2H         LINE#         876
+  C:06B2H         LINE#         877
+  C:06B4H         LINE#         878
+  C:06B8H         LINE#         879
+  C:06B8H         LINE#         881
+  C:06C0H         LINE#         882
+  C:06C2H         LINE#         883
+  C:06E4H         LINE#         884
+  C:06E6H         LINE#         885
+  C:06EEH         LINE#         887
+  C:06EEH         LINE#         888
+  C:06EEH         LINE#         889
+  C:06EEH         LINE#         890
+  C:06F1H         LINE#         891
+  C:06F1H         LINE#         892
+  C:070DH         LINE#         893
+  C:0715H         LINE#         894
+  C:0737H         LINE#         895
+  C:073FH         LINE#         897
+  C:073FH         LINE#         898
+  C:073FH         LINE#         899
+  C:073FH         LINE#         900
+  C:073FH         LINE#         901
+  C:0742H         LINE#         902
+  C:0742H         LINE#         903
+  C:0748H         LINE#         904
+  C:074DH         LINE#         905
+  C:074FH         LINE#         906
+  C:074FH         LINE#         907
+  C:075BH         LINE#         908
+  C:075BH         LINE#         909
+  C:077CH         LINE#         910
+  C:077CH         LINE#         911
+  C:077EH         LINE#         912
+  C:0782H         LINE#         913
+  C:0782H         LINE#         915
+  C:078AH         LINE#         916
+  C:078CH         LINE#         917
+  C:07AEH         LINE#         918
+  C:07B0H         LINE#         919
+  C:07B8H         LINE#         921
+  C:07B8H         LINE#         922
+  C:07B8H         LINE#         923
+  C:07B8H         LINE#         924
+  C:07BAH         LINE#         925
+  C:07BAH         LINE#         926
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/03/2025  10:07:41  PAGE 7
+
+
+  C:07D6H         LINE#         927
+  C:07DEH         LINE#         928
+  C:0800H         LINE#         929
+  C:0808H         LINE#         931
+  C:080AH         LINE#         932
+  C:0811H         LINE#         933
+  C:0813H         LINE#         934
+  C:0813H         LINE#         935
+  C:0814H         LINE#         936
+  C:0814H         LINE#         937
+  C:0819H         LINE#         938
+  C:081BH         LINE#         939
+  C:081DH         LINE#         940
+  C:081FH         LINE#         941
+  C:081FH         LINE#         942
+  C:081FH         LINE#         943
+  C:081FH         LINE#         944
+  -------         ENDPROC       MUSICUPDATE
+  -------         PROC          FREQLUPDATE
+  C:0BDFH         LINE#         946
+  C:0BDFH         LINE#         947
+  C:0BDFH         LINE#         948
+  C:0BEBH         LINE#         949
+  -------         ENDPROC       FREQLUPDATE
+  -------         PROC          FREQHUPDATE
+  C:0BC4H         LINE#         951
+  C:0BC4H         LINE#         952
+  C:0BC4H         LINE#         953
+  C:0BD1H         LINE#         954
+  -------         ENDPROC       FREQHUPDATE
+  -------         PROC          BUZZ
+  C:0003H         LINE#         956
+  C:0003H         LINE#         957
+  C:0003H         LINE#         958
+  C:0005H         LINE#         959
+  -------         ENDPROC       BUZZ
+  -------         ENDMOD        MUSIC
+
+  -------         MODULE        ?C?IMUL
+  C:0BB2H         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+Program Size: data=101.0 xdata=978 code=3047
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
