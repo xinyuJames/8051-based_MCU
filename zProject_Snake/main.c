@@ -1,3 +1,10 @@
+/*
+Xinyu Liu self-taught 8051 MCU
+Description: this is a snake game developed by myself. Using timer and interrupts, showing snake on 8*8 matrix LED.
+Using matrix button to control + restart, and independent buttons to select difficulties. Watch demo is readme
+Version@2025/1/3
+*/
+
 #include <REGX52.H>
 #include "Delay.h"
 #include "MLED_Lib.h"

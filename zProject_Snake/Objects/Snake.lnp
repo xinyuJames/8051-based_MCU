@@ -5,7 +5,6 @@
 ".\Objects\MatrixLED.obj",
 ".\Objects\MLED_Lib.obj",
 ".\Objects\Snake.obj",
-".\Objects\SnakeKey.obj",
 ".\Objects\Timer0.obj" 
 TO ".\Objects\Snake" 
 PRINT(".\Listings\Snake.m51") RAMSIZE(256) 

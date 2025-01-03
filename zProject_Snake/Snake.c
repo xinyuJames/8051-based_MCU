@@ -1,3 +1,9 @@
+/*
+Xinyu Liu self-taught 8051 MCU
+Description: this file is to store "snake object" and corresponding functions.
+Version@2025/1/3
+*/
+
 #include <REGX52.H>
 #include <INTRINS.H>
 #include <STDLIB.H>

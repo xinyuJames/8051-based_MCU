@@ -1,3 +1,9 @@
+/*
+Xinyu Liu self-taught 8051 MCU
+Description: this is a LED words library, which contains all the animations or pics I need for snake game.
+Version@2025/1/3
+*/
+
 #include <REGX52.H>
 #include <INTRINS.H>
 #include "MatrixLED.h"

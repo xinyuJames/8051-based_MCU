@@ -442,16 +442,6 @@
               <FilePath>.\Snake.h</FilePath>
             </File>
             <File>
-              <FileName>SnakeKey.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\SnakeKey.c</FilePath>
-            </File>
-            <File>
-              <FileName>SnakeKey.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\SnakeKey.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer0.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Timer0.c</FilePath>

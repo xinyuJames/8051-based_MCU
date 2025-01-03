@@ -1,3 +1,7 @@
+/*
+Delay_s function source codes, this is shorter time than Delay...
+*/
+
 #include <REGX52.H>
 #include <INTRINS.H>
 

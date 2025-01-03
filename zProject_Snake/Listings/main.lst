@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 06:01:55 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 09:54:13 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -8,192 +8,201 @@ COMPILER INVOKED BY: D:\C51V961\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE 
 
 line level    source
 
-   1          #include <REGX52.H>
-   2          #include "Delay.h"
-   3          #include "MLED_Lib.h"
-   4          #include "MatrixLED.h"
-   5          #include "MatrixKey.h"
-   6          #include "Snake.h"
-   7          #include "Timer0.h"
-   8          
-   9          //TODO: 1. difficulty selection
-  10          //IDEA: 1. use independent button do move, use matrix to restart, so we can use buzzer
-  11          unsigned char key;
-  12          unsigned char movementMode = 1; //1 - up; 2 - down; 3 - left; 4 - right
-  13          unsigned char level = 0;
-  14          
-  15          void Key_Input();
-  16          void levelSelection();
-  17          
-  18          void main()
-  19          {
-  20   1        unsigned int i;
-  21   1        
-  22   1        MLED_Init();
-  23   1        Snake_Init();
-  24   1        Timer0_Init();
-  25   1        while(1)
-  26   1        {
-  27   2          if (isOver())
-  28   2          {
-  29   3            if (isWin())
-  30   3            {
-  31   4              //go into win page
-  32   4              for (i = 0; i < 50; i ++)
-  33   4              {
-  34   5                showSnake();
-  35   5              }
-  36   4              MLEDShow_WIN(); 
-  37   4              MLEDShow_SCORE(getScore());
-  38   4              
-  39   4              //after displaying win page, waiting to restart
-  40   4              while(isOver())
-  41   4              {
-  42   5                MLEDShow_SMILE();
-  43   5                Key_Input();
-  44   5              }
+   1          /*
+   2          Xinyu Liu self-taught 8051 MCU
+   3          Description: this is a snake game developed by myself. Using timer and interrupts, showing snake on 8*8 ma
+             -trix LED.
+   4          Using matrix button to control + restart, and independent buttons to select difficulties. Watch demo is re
+             -adme
+   5          Version@2025/1/3
+   6          */
+   7          
+   8          #include <REGX52.H>
+   9          #include "Delay.h"
+  10          #include "MLED_Lib.h"
+  11          #include "MatrixLED.h"
+  12          #include "MatrixKey.h"
+  13          #include "Snake.h"
+  14          #include "Timer0.h"
+  15          
+  16          //TODO: 1. difficulty selection
+  17          //IDEA: 1. use independent button do move, use matrix to restart, so we can use buzzer
+  18          unsigned char key;
+  19          unsigned char movementMode = 1; //1 - up; 2 - down; 3 - left; 4 - right
+  20          unsigned char level = 0;
+  21          
+  22          void Key_Input();
+  23          void levelSelection();
+  24          
+  25          void main()
+  26          {
+  27   1        unsigned int i;
+  28   1        
+  29   1        MLED_Init();
+  30   1        Snake_Init();
+  31   1        Timer0_Init();
+  32   1        while(1)
+  33   1        {
+  34   2          if (isOver())
+  35   2          {
+  36   3            if (isWin())
+  37   3            {
+  38   4              //go into win page
+  39   4              for (i = 0; i < 50; i ++)
+  40   4              {
+  41   5                showSnake();
+  42   5              }
+  43   4              MLEDShow_WIN(); 
+  44   4              MLEDShow_SCORE(getScore());
   45   4              
-  46   4            } else
-  47   3            {
-  48   4              //go into game over page
-  49   4              for (i = 0; i < 50; i ++)
-  50   4              {
-  51   5                showSnake();
-  52   5              }
-  53   4              MLEDShow_GAMEOVER();  
-  54   4              MLEDShow_SCORE(getScore());
-C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 06:01:55 PAGE 2   
+  46   4              //after displaying win page, waiting to restart
+  47   4              while(isOver())
+  48   4              {
+  49   5                MLEDShow_SMILE();
+  50   5                Key_Input();
+  51   5              }
+  52   4              
+C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 09:54:13 PAGE 2   
 
-  55   4              
-  56   4              //after displaying game over page, waiting to restart
-  57   4              while(isOver())
-  58   4              {
-  59   5                MLEDShow_SAD();
-  60   5                Key_Input();
-  61   5              }
-  62   4            }
-  63   3            
-  64   3          } else
-  65   2          {
-  66   3            //select level first
-  67   3            levelSelection();
-  68   3            //game playing phase
-  69   3            Key_Input();
-  70   3            showSnake(); //show snake body and food 
-  71   3          }
-  72   2          
-  73   2        }
-  74   1      }
-  75          
-  76          void Timer0_Routine() interrupt 1
-  77          {
-  78   1        //timer setup
-  79   1        static unsigned int count;
-  80   1        TL0 = 0x66; 
-  81   1        TH0 = 0xFC;
-  82   1        count++;
-  83   1        
-  84   1        //refresh rate 500ms
-  85   1        if (level)
-  86   1        {
-  87   2          if (count >= (5 - level) * 250)
-  88   2          {
-  89   3            if (!isOver())
-  90   3            {
-  91   4              if (movementMode == 1) {moveUp();}
-  92   4              if (movementMode == 2) {moveDown();}  
-  93   4              if (movementMode == 3) {moveLeft();}
-  94   4              if (movementMode == 4) {moveRight();}
-  95   4            }
-  96   3            //change status of snake
-  97   3              
-  98   3            count = 0;
-  99   3          }
- 100   2        }
- 101   1        
- 102   1      }
- 103          
- 104          
- 105          
- 106          
- 107          //identify key input
- 108          void Key_Input()
- 109          { 
- 110   1        key = getMKey();
- 111   1        
- 112   1        if (level)
- 113   1        {
- 114   2          //press 16 in matrix button to restart the game
- 115   2          if(key)
- 116   2          {
-C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 06:01:55 PAGE 3   
+  53   4            } else
+  54   3            {
+  55   4              //go into game over page
+  56   4              for (i = 0; i < 50; i ++)
+  57   4              {
+  58   5                showSnake();
+  59   5              }
+  60   4              MLEDShow_GAMEOVER();  
+  61   4              MLEDShow_SCORE(getScore());
+  62   4              
+  63   4              //after displaying game over page, waiting to restart
+  64   4              while(isOver())
+  65   4              {
+  66   5                MLEDShow_SAD();
+  67   5                Key_Input();
+  68   5              }
+  69   4            }
+  70   3            
+  71   3          } else
+  72   2          {
+  73   3            //select level first
+  74   3            levelSelection();
+  75   3            //game playing phase
+  76   3            Key_Input();
+  77   3            showSnake(); //show snake body and food 
+  78   3          }
+  79   2          
+  80   2        }
+  81   1      }
+  82          
+  83          void Timer0_Routine() interrupt 1
+  84          {
+  85   1        //timer setup
+  86   1        static unsigned int count;
+  87   1        TL0 = 0x66; 
+  88   1        TH0 = 0xFC;
+  89   1        count++;
+  90   1        
+  91   1        //refresh rate 500ms
+  92   1        if (level)
+  93   1        {
+  94   2          if (count >= (5 - level) * 250)
+  95   2          {
+  96   3            if (!isOver())
+  97   3            {
+  98   4              if (movementMode == 1) {moveUp();}
+  99   4              if (movementMode == 2) {moveDown();}  
+ 100   4              if (movementMode == 3) {moveLeft();}
+ 101   4              if (movementMode == 4) {moveRight();}
+ 102   4            }
+ 103   3            //change status of snake
+ 104   3              
+ 105   3            count = 0;
+ 106   3          }
+ 107   2        }
+ 108   1        
+ 109   1      }
+ 110          
+ 111          
+ 112          
+ 113          
+ 114          //identify key input
+C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 09:54:13 PAGE 3   
 
- 117   3            if (key == 16)
- 118   3            {
- 119   4              snakeRestart();
- 120   4              movementMode = 1;
- 121   4              level = 0;
- 122   4            }
- 123   3            //take input of movement if restart is not pressed
- 124   3            if (key == 2)
+ 115          void Key_Input()
+ 116          { 
+ 117   1        key = getMKey();
+ 118   1        
+ 119   1        if (level)
+ 120   1        {
+ 121   2          //press 16 in matrix button to restart the game
+ 122   2          if(key)
+ 123   2          {
+ 124   3            if (key == 16)
  125   3            {
- 126   4              movementMode = 1;
- 127   4            } else if (key == 10)
- 128   3            {
- 129   4              movementMode = 2;
- 130   4            } else if (key == 5)
- 131   3            {
- 132   4              movementMode = 3;
- 133   4            } else if (key == 7)
- 134   3            {
- 135   4              movementMode = 4;
- 136   4            }
- 137   3          }
- 138   2        } else
- 139   1        {
- 140   2          if (P3_1 == 0)
- 141   2          {
- 142   3            Delay(20);
- 143   3            while(P3_1 == 0);
- 144   3            Delay(20);
- 145   3            level = 1;
- 146   3          }
- 147   2          if (P3_0 == 0)
+ 126   4              snakeRestart();
+ 127   4              movementMode = 1;
+ 128   4              level = 0;
+ 129   4            }
+ 130   3            //take input of movement if restart is not pressed
+ 131   3            if (key == 2)
+ 132   3            {
+ 133   4              movementMode = 1;
+ 134   4            } else if (key == 10)
+ 135   3            {
+ 136   4              movementMode = 2;
+ 137   4            } else if (key == 5)
+ 138   3            {
+ 139   4              movementMode = 3;
+ 140   4            } else if (key == 7)
+ 141   3            {
+ 142   4              movementMode = 4;
+ 143   4            }
+ 144   3          }
+ 145   2        } else
+ 146   1        {
+ 147   2          if (P3_1 == 0)
  148   2          {
  149   3            Delay(20);
- 150   3            while(P3_0 == 0);
+ 150   3            while(P3_1 == 0);
  151   3            Delay(20);
- 152   3            level = 2;
+ 152   3            level = 1;
  153   3          }
- 154   2          if (P3_2 == 0)
+ 154   2          if (P3_0 == 0)
  155   2          {
  156   3            Delay(20);
- 157   3            while(P3_2 == 0);
+ 157   3            while(P3_0 == 0);
  158   3            Delay(20);
- 159   3            level = 3;
+ 159   3            level = 2;
  160   3          }
- 161   2          if (P3_3 == 0)
+ 161   2          if (P3_2 == 0)
  162   2          {
  163   3            Delay(20);
- 164   3            while(P3_3 == 0);
+ 164   3            while(P3_2 == 0);
  165   3            Delay(20);
- 166   3            level = 4;
+ 166   3            level = 3;
  167   3          }
- 168   2        }
- 169   1        
- 170   1      }
- 171          
- 172          void levelSelection()
- 173          {
- 174   1        
- 175   1        while (!level)
- 176   1        {
- 177   2          MLEDShow_TITLE();
- 178   2          Key_Input();
-C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 06:01:55 PAGE 4   
+ 168   2          if (P3_3 == 0)
+ 169   2          {
+ 170   3            Delay(20);
+ 171   3            while(P3_3 == 0);
+ 172   3            Delay(20);
+ 173   3            level = 4;
+ 174   3          }
+ 175   2        }
+ 176   1        
+C51 COMPILER V9.60.7.0   MAIN                                                              01/03/2025 09:54:13 PAGE 4   
 
- 179   2        }
- 180   1      }
+ 177   1      }
+ 178          
+ 179          void levelSelection()
+ 180          {
+ 181   1        
+ 182   1        while (!level)
+ 183   1        {
+ 184   2          MLEDShow_TITLE();
+ 185   2          Key_Input();
+ 186   2        }
+ 187   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

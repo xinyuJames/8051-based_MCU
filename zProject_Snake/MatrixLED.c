@@ -1,3 +1,9 @@
+/*
+Xinyu Liu self-taught 8051 MCU
+Description: this is for correctly show things on matrix LED.
+Version@2025/1/3
+*/
+
 #include <REGX52.H>
 #include <INTRINS.H>
 #include "Delay_s.h"
