@@ -17,3 +17,7 @@ If you wanna execute them, use files and run them at following setup...
 - **Keil5 IDE**: Used for writing and compiling C code.
 - **STC-ISP**: For downloading the code onto the STC89C516RD+.
 - **USB Adapter**: The driver to connect the development board with your PC.
+
+## Demo:
+### Music Play: [click here to watch](https://www.youtube.com/watch?v=Rg_T8yHtxj0&ab_channel=Jamesliu)
+### Snake Game: [click here to watch](https://www.youtube.com/watch?v=9ZEluINuhaA&ab_channel=Jamesliu)
